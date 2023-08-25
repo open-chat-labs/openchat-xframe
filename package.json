@@ -1,0 +1,17 @@
+{
+    "name": "@open-ic/openchat-xframe",
+    "version": "1.0.0",
+    "description": "Client library for hosting OpenChat in an iframe",
+    "main": "lib/index.js",
+    "scripts": {
+        "build": "tsc"
+    },
+    "author": "julian.jelfs@gmail.com",
+    "license": "ISC",
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^6.4.0",
+        "@typescript-eslint/parser": "^6.4.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-plugin-prettier": "^5.0.0"
+    }
+}
