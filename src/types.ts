@@ -1,5 +1,5 @@
 export type OpenChatXFrameOptions = {
-    theme: ThemeOverride;
+    theme?: ThemeOverride;
     targetOrigin: string;
     initialPath?: string;
 };
