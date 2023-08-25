@@ -89,3 +89,17 @@ const client = await initialise(iframe, {
     }
 });
 ```
+
+## Limitations
+
+### User mapping
+
+At the moment this is simply a window onto the existing OpenChat site. This means that to use it, the user must have an OpenChat account and that account will have no relationship with any user account that the user may have on _your_ site. This might mean that your user has to effectively log in twice - once to your site and once to OpenChat.
+
+Of course, this is not good enough for everyone and some sort of link / mapping between the users would be ideal. What we are delivering is a minimun viable product and we will continue to improve it over time.
+
+### Look and feel
+
+Integrating via iframe doesn't give me enough control over the features and the look and feel - why can't you just give me an api? There are many ways that integration can be achieved. Integrating via iframe has a number of key advantages. Firstly, it is simple. You don't need to worry about writing the UI code yourself (and trust me - it's complicated). Secondly, it's always up to date. If we update OpenChat then that's the version that gets rendered in your iframe. This way we minimise the risk of breaking changes to downstream users. Finally, it is more secure. The smaller the surface area we expose to third parties the better. We don't want to have to trust the practices of all of the teams that choose to embed OpenChat.
+
+That said - it is also possible that we may develop a set of more flexible web components or indeed a full api in the future. Those future developments will need to be driven by concrete use-cases that emerge.
