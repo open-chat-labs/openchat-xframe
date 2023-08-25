@@ -20,12 +20,14 @@ async function onFrameLoaded(
         window.addEventListener("message", (ev) => {
             debug("received message on window", ev);
             if (ev.origin === options.targetOrigin && ev.data === "openchat_ready") {
-                sendMessage(iframe, options.targetOrigin, {
-                    kind: "update_theme",
-                    base: options.theme.base,
-                    name: options.theme.name,
-                    overrides: options.theme.overrides,
-                });
+                if (options.theme !== undefined) {
+                    sendMessage(iframe, options.targetOrigin, {
+                        kind: "update_theme",
+                        base: options.theme.base,
+                        name: options.theme.name,
+                        overrides: options.theme.overrides,
+                    });
+                }
                 resolve({
                     changePath: (path: string) => {
                         sendMessage(iframe, options.targetOrigin, {
