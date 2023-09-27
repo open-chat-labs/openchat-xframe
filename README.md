@@ -33,6 +33,7 @@ type OpenChatXFrameOptions = {
     theme?: ThemeOverride;
     targetOrigin: string;
     initialPath?: string;
+    delegateNavigation?: boolean; // defaults to false
 };
 ```
 
@@ -40,15 +41,18 @@ You must provide the targetOrigin. This is origin where you expect OpenChat to b
 
 You may provide an initial path (without the origin) if you want to navigate to a specific community or chat on initalisation.
 
-Finally you may provide some theme overrides so that OpenChat more closely resembles the look and feel of your own site. If you really want to change the style of something but can't work out how to do it, then get in touch and we can help.
+You may provide some theme overrides so that OpenChat more closely resembles the look and feel of your own site. If you really want to change the style of something but can't work out how to do it, then get in touch and we can help.
+
+You may also choose whether or not the OpenChat instance within the iframe should delegate navigation events back to the host site. If we to true, when a navigation event occurs within OpenChat, for example if the user selects a chat, rather than the OpenChat instance handling that navigation event and switching the UI to the selected chat, it will send the path to which it would ordinarily navigate to the host site. This is useful if you wish to split your integration into two frames. Perhaps a left frame showing a list of direct chats and a right frame showing just the selected chat. In this example, you would set `delegateNavigation` to true on the left hand frame and subscribe to changePath events on the OpenChatXFrame client. When you receive such an event you can call `changePath` on the right hand instance of OpenChat.
 
 The interface of the client library returned by the `initialise` function is extremely limited at the moment and only provides the following function:
 
 ```
 changePath: (path: string) => void;
+onChangePath: (callback: (path: string) => void);
 ```
 
-This allows you to delegate routing from your site to the OpenChat instance.
+This allows you to delegate routing from your site to the OpenChat instance and vice versa.
 
 We may add more functions to this interface in future.
 
@@ -69,6 +73,7 @@ import { initialise } from '@open-ic/openchat-xframe';
 
 const client = await initialise(iframe, {
     targetOrigin: 'https://oc.app',
+    delegateNavigation: false,
     initialPath:
         '/community/rfeib-riaaa-aaaar-ar3oq-cai/channel/334961401678552956581044255076222828441',
     theme: {

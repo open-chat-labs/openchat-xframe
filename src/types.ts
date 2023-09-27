@@ -2,6 +2,8 @@ export type OpenChatXFrameOptions = {
     theme?: ThemeOverride;
     targetOrigin: string;
     initialPath?: string;
+    delegateNavigation?: boolean;
+    onNavigate?: (path: string) => void;
 };
 
 export type ThemeOverride = {

@@ -19,23 +19,35 @@ async function onFrameLoaded(
         debug("listening for openchat ready");
         window.addEventListener("message", (ev) => {
             debug("received message on window", ev);
-            if (ev.origin === options.targetOrigin && ev.data === "openchat_ready") {
-                if (options.theme !== undefined) {
+            if (ev.origin === options.targetOrigin) {
+                if (ev.data === "openchat_ready") {
                     sendMessage(iframe, options.targetOrigin, {
-                        kind: "update_theme",
-                        base: options.theme.base,
-                        name: options.theme.name,
-                        overrides: options.theme.overrides,
+                        kind: "configure_iframe",
+                        delegateNavigation: options.delegateNavigation,
+                        theme: options.theme
+                            ? {
+                                  kind: "update_theme",
+                                  base: options.theme.base,
+                                  name: options.theme.name,
+                                  overrides: options.theme.overrides,
+                              }
+                            : undefined,
+                    });
+                    resolve({
+                        changePath: (path: string) => {
+                            sendMessage(iframe, options.targetOrigin, {
+                                kind: "change_route",
+                                path,
+                            });
+                        },
                     });
                 }
-                resolve({
-                    changePath: (path: string) => {
-                        sendMessage(iframe, options.targetOrigin, {
-                            kind: "change_route",
-                            path,
-                        });
-                    },
-                });
+
+                if (ev.data?.kind === "openchat_navigation") {
+                    if (options.onNavigate) {
+                        options.onNavigate(ev.data.path);
+                    }
+                }
             }
         });
     });
