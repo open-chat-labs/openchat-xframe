@@ -2,6 +2,9 @@ export type OpenChatXFrameOptions = {
     theme?: ThemeOverride;
     targetOrigin: string;
     initialPath?: string;
+    settings?: {
+        disableLeftNav: boolean;
+    };
 };
 
 export type ThemeOverride = {
