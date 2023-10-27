@@ -20,6 +20,12 @@ async function onFrameLoaded(
         window.addEventListener("message", (ev) => {
             debug("received message on window", ev);
             if (ev.origin === options.targetOrigin && ev.data === "openchat_ready") {
+                if (options.settings !== undefined) {
+                    sendMessage(iframe, options.targetOrigin, {
+                        kind: "override_settings",
+                        settings: options.settings,
+                    });
+                }
                 if (options.theme !== undefined) {
                     sendMessage(iframe, options.targetOrigin, {
                         kind: "update_theme",
