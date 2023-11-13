@@ -2,6 +2,7 @@ export type OpenChatXFrameOptions = {
     theme?: ThemeOverride;
     targetOrigin: string;
     initialPath?: string;
+    onUserIdentified?: (userId: string) => void;
     settings?: {
         disableLeftNav: boolean;
     };
@@ -19,11 +20,13 @@ export type OpenChatXFrame = {
 
 export type StyleOverrides = {
     burst?: boolean;
+    logo?: boolean;
     bg?: string;
     txt?: string;
     "txt-light"?: string;
     bd?: string;
-
+    rd?: string;
+    bw?: string;
     error?: string;
     warn?: string;
     accent?: string;
@@ -31,7 +34,6 @@ export type StyleOverrides = {
     disabledTxt?: string;
     primary?: string;
     code?: string;
-
     placeholder?: string;
 
     progress?: {
@@ -93,6 +95,7 @@ export type StyleOverrides = {
 
     input?: {
         bg?: string;
+        bd?: string;
         sh?: string;
         accent?: string;
     };
@@ -106,6 +109,8 @@ export type StyleOverrides = {
         input?: {
             bg?: string;
             sh?: string;
+            rd?: string;
+            bd?: string;
         };
     };
 
@@ -131,6 +136,8 @@ export type StyleOverrides = {
     chatSearch?: {
         bg?: string;
         sh?: string;
+        rd?: string;
+        bd?: string;
     };
 
     chatSummary?: {
@@ -156,11 +163,16 @@ export type StyleOverrides = {
     button?: {
         bg?: string;
         hv?: string;
+        "hv-txt"?: string;
+        "txt-sh"?: string;
         txt?: string;
         disabled?: string;
         spinner?: string;
         "disabled-txt"?: string;
         "disabled-bd"?: string;
+        rd?: string;
+        sh?: string;
+        "hv-sh"?: string;
     };
 
     link?: {
@@ -171,6 +183,8 @@ export type StyleOverrides = {
         filter?: string;
         bg?: string;
         bd?: string;
+        rd?: string;
+        sh?: string;
     };
 
     modalPage?: {
@@ -197,12 +211,16 @@ export type StyleOverrides = {
             txt?: string;
             inert?: string;
             sh?: string;
+            r1?: string;
+            r2?: string;
+            separator?: string;
 
             me?: {
                 bg?: string;
                 muted?: string;
                 txt?: string;
                 bd?: string;
+                separator?: string;
             };
         };
     };
@@ -210,6 +228,12 @@ export type StyleOverrides = {
     time?: {
         txt?: string;
         icon?: string;
+        bg?: string;
+        me?: {
+            txt?: string;
+            icon?: string;
+            bg?: string;
+        };
     };
 
     icon?: {
@@ -278,6 +302,11 @@ export type StyleOverrides = {
         };
     };
 
+    card?: {
+        rd?: string;
+        sh?: string;
+    };
+
     landing?: {
         txt?: string;
         "txt-light"?: string;
@@ -303,7 +332,7 @@ export type StyleOverrides = {
         header?: {
             bg?: string;
             txt?: string;
-            bd: string;
+            bd?: string;
         };
 
         auth?: {

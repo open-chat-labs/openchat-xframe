@@ -1,6 +1,6 @@
 {
     "name": "@open-ic/openchat-xframe",
-    "version": "1.0.2",
+    "version": "1.0.4",
     "description": "Client library for hosting OpenChat in an iframe",
     "main": "lib/index.js",
     "scripts": {

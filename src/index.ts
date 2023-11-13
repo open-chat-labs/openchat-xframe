@@ -43,6 +43,15 @@ async function onFrameLoaded(
                     },
                 });
             }
+            if (
+                ev.origin === options.targetOrigin &&
+                ev.data &&
+                ev.data.kind === "openchat_user_logged_in"
+            ) {
+                if (options.onUserIdentified) {
+                    options.onUserIdentified(ev.data.userId);
+                }
+            }
         });
     });
 }

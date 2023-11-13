@@ -33,6 +33,10 @@ type OpenChatXFrameOptions = {
     theme?: ThemeOverride;
     targetOrigin: string;
     initialPath?: string;
+    onUserIdentified?: (userId: string) => void;
+    settings?: {
+        disableLeftNav: boolean;
+    };
 };
 ```
 
@@ -40,7 +44,11 @@ You must provide the targetOrigin. This is origin where you expect OpenChat to b
 
 You may provide an initial path (without the origin) if you want to navigate to a specific community or chat on initalisation.
 
-Finally you may provide some theme overrides so that OpenChat more closely resembles the look and feel of your own site. If you really want to change the style of something but can't work out how to do it, then get in touch and we can help.
+You may provide some theme overrides so that OpenChat more closely resembles the look and feel of your own site. If you really want to change the style of something but can't work out how to do it, then get in touch and we can help.
+
+You can provide a callback function that will be called at the earliest point when the OpenChat system knows who the logged in user is. This callback will be called with the user's userId.
+
+If you do not expect to be allowing users to navigate the full OpenChat user interface, you may also wish to set the `disableLeftNav` flag to true.
 
 The interface of the client library returned by the `initialise` function is extremely limited at the moment and only provides the following function:
 
