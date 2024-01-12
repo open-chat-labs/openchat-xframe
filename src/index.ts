@@ -35,6 +35,11 @@ async function onFrameLoaded(
                     });
                 }
                 resolve({
+                    logout: () => {
+                        sendMessage(iframe, options.targetOrigin, {
+                            kind: "logout",
+                        });
+                    },
                     changePath: (path: string) => {
                         sendMessage(iframe, options.targetOrigin, {
                             kind: "change_route",

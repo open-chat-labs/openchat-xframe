@@ -50,10 +50,11 @@ You can provide a callback function that will be called at the earliest point wh
 
 If you do not expect to be allowing users to navigate the full OpenChat user interface, you may also wish to set the `disableLeftNav` flag to true.
 
-The interface of the client library returned by the `initialise` function is extremely limited at the moment and only provides the following function:
+The interface of the client library returned by the `initialise` function is extremely limited at the moment and provides the following functions:
 
 ```
 changePath: (path: string) => void;
+logout: () => void;
 ```
 
 This allows you to delegate routing from your site to the OpenChat instance.
