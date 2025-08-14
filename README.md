@@ -29,16 +29,21 @@ This should be a referrence to the iframe in which you wish to host OpenChat
 ### options (OpenChatXFrameOptions)
 
 ```ts
+type RestrictTo = "selected_community" | "selected_chat";
+
 type OpenChatXFrameOptions = {
     theme?: ThemeOverride;
     targetOrigin: string;
     initialPath?: string;
     onUserIdentified?: (userId: string) => void;
     settings?: {
-        disableLeftNav: boolean;
+        restrictTo?: RestrictTo;
     };
 };
 ```
+
+If you choose to restrict to the `selected_community` then the left nav will not appear. If you choose to restrict to the `selected_chat` then the whole left panel will not be available. This is often desirable if you want to limit embedded chat
+to a particular scope. A user can always visit https://oc.app directly for the full experience.
 
 You must provide the targetOrigin. This is origin where you expect OpenChat to be hosted. To target the live OpenChat site this would be `https://oc.app` but it is also possible that you will want to run OpenChat locally while testing.
 

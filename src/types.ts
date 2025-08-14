@@ -4,9 +4,12 @@ export type OpenChatXFrameOptions = {
     initialPath?: string;
     onUserIdentified?: (userId: string) => void;
     settings?: {
-        disableLeftNav: boolean;
+        disableLeftNav?: boolean;
+        restrictTo?: RestrictTo;
     };
 };
+
+export type RestrictTo = "selected_community" | "selected_chat";
 
 export type ThemeOverride = {
     base: "light" | "dark"; // should we override the light or the dark theme in OpenChat
