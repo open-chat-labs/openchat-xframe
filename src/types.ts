@@ -20,6 +20,7 @@ export type ThemeOverride = {
 export type OpenChatXFrame = {
     changePath: (path: string) => void;
     logout: () => void;
+    dispose: () => void;
 };
 
 export type StyleOverrides = {

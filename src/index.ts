@@ -17,9 +17,11 @@ async function onFrameLoaded(
     debug("iframe loaded");
     return new Promise((resolve) => {
         debug("listening for openchat ready");
-        window.addEventListener("message", (ev) => {
-            debug("received message on window", ev);
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        function onMessage(ev: MessageEvent<any>) {
             if (ev.origin === options.targetOrigin && ev.data === "openchat_ready") {
+                debug("received message on window", ev);
                 if (options.settings !== undefined) {
                     sendMessage(iframe, options.targetOrigin, {
                         kind: "override_settings",
@@ -46,6 +48,10 @@ async function onFrameLoaded(
                             path,
                         });
                     },
+                    dispose: () => {
+                        debug("removing xframe message handler");
+                        window.removeEventListener("message", onMessage);
+                    },
                 });
             }
             if (
@@ -57,7 +63,9 @@ async function onFrameLoaded(
                     options.onUserIdentified(ev.data.userId);
                 }
             }
-        });
+        }
+
+        window.addEventListener("message", onMessage);
     });
 }
 
